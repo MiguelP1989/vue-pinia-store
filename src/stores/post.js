@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { computed } from "vue";
 
 export const usePostStore = defineStore({
   id: "post",
@@ -22,7 +23,11 @@ export const usePostStore = defineStore({
       try {
         this.posts = await fetch(
           "https://jsonplaceholder.typicode.com/posts"
-        ).then((resp) => resp.json());
+        ).then((resp) => {
+          const bu = resp.json();
+
+          return bu;
+        });
       } catch (error) {
         this.error = error;
       } finally {
